@@ -1,3 +1,5 @@
+//The key takeaway here is that we now have the original state and the updated state in two separate entities, allowing the application to compare them and notice the change
+
 import { useReducer } from "react";
 import {
   UPDATE_PRODUCTS,
