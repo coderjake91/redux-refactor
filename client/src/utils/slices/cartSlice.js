@@ -19,7 +19,7 @@ export const cartSlice = createSlice({
     cartOpen: false
   },
   reducers: {
-    addToCart: (state, action) => {
+    addToUserCart: (state, action) => {
       state.cartOpen = true;
       state.cart.push(action.payload);
     },
@@ -32,7 +32,7 @@ export const cartSlice = createSlice({
           return product
         });
     },
-    removeFromCart: (state, action) => {
+    removeFromUserCart: (state, action) => {
       let newState = state.cart.filter(product => {
           return product._id !== action.payload._id;
         });
@@ -47,18 +47,18 @@ export const cartSlice = createSlice({
     clearCart: state => {
       state.cartOpen =  false;
     },
-    toggleCart: state => {
+    toggleUserCart: state => {
       state.cartOpen = !state.cartOpen;
     }
   }
 });
 
 // Action creators are generated for each reducer in the slice
-export const { addToCart,
+export const { addToUserCart,
                updateCartQuantity,
-               removeFromCart,
+               removeFromUserCart,
                addMultipleToCart,
                clearCart,
-               toggleCart } = cartSlice.actions
+               toggleUserCart } = cartSlice.actions
 
 export default cartSlice.reducer
