@@ -9,15 +9,17 @@ CLEAR_CART,
 TOGGLE_CART
 */
 
+const initialState = {
+  cart: [],
+  cartOpen: false
+}
+
 
 //Immer (within Redux toolkit) allows for managing state flow in the reducer without worrying about mutating state (i.e no rest operator syntax required)
 
 export const cartSlice = createSlice({
   name: 'cart',
-  initialState: {
-    cart: [],
-    cartOpen: false
-  },
+  initialState,
   reducers: {
     addToUserCart: (state, action) => {
       state.cartOpen = true;
@@ -36,9 +38,12 @@ export const cartSlice = createSlice({
       let newState = state.cart.filter(product => {
           return product._id !== action.payload._id;
         });
-  
-      state.cartOpen =  newState.length > 0,
-      state.cart =  newState;
+
+        if(newState.length > 0){
+          state.cartOpen =  true;
+        }
+
+        state.cart =  newState;
 
     },
     addMultipleToCart: (state, action) => {
@@ -52,6 +57,10 @@ export const cartSlice = createSlice({
     }
   }
 });
+
+export const selectCart = (state) => state.cart.cart;
+export const selectCartOpen = (state) => state.cart.cartOpen;
+
 
 // Action creators are generated for each reducer in the slice
 export const { addToUserCart,

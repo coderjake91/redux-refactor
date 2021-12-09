@@ -1,8 +1,9 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect } from "react";
 import ProductItem from "../ProductItem";
 //import { useStoreContext } from "../../utils/GlobalState";
 //import { UPDATE_PRODUCTS } from "../../utils/actions";
-import { updateProducts } from '../../utils/slices/productSlice';
+import { updateProducts, selectProducts } from '../../utils/slices/productSlice';
+import { selectCurrentCategory } from "../../utils/slices/categorySlice";
 import { useSelector, useDispatch } from 'react-redux';
 import { useQuery } from '@apollo/react-hooks';
 import { QUERY_PRODUCTS } from "../../utils/queries";
@@ -11,7 +12,8 @@ import spinner from "../../assets/spinner.gif"
 
 function ProductList() {
   //const [state, dispatch] = useStoreContext();
-  const { currentCategory } = useSelector(state => state.currentCategory);
+  const products  = useSelector(selectProducts);
+  const currentCategory = useSelector(selectCurrentCategory);
   const dispatch = useDispatch();
 
   //const { currentCategory } = state;
@@ -41,16 +43,16 @@ function ProductList() {
 
   function filterProducts() {
     if (!currentCategory) {
-      return state.products;
+      return products;
     }
 
-    return state.products.filter(product => product.category._id === currentCategory);
+    return products.filter(product => product.category._id === currentCategory);
   }
 
   return (
     <div className="my-2">
       <h2>Our Products:</h2>
-      {state.products.length ? (
+      {products.length ? (
         <div className="flex-row">
             {filterProducts().map(product => (
                 <ProductItem

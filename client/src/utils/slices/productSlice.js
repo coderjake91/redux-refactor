@@ -4,17 +4,21 @@ import { createSlice } from '@reduxjs/toolkit'
 UPDATE_PRODUCTS
 */
 
+const initialState =  {
+  products: []
+}
+
 export const productSlice = createSlice({
   name: 'product',
-  initialState: {
-    products: []
-  },
+  initialState,
   reducers: {
     updateProducts: (state, action)=> {
-        state.products.push(action.payload);
+        state.products = action.payload;
     }
   }
 });
+
+export const selectProducts = (state) => state.product.products;
 
 // Action creators are generated for each case reducer function
 export const { updateProducts } = productSlice.actions

@@ -5,6 +5,8 @@ import cartReducer from './slices/cartSlice'
 import categoryReducer from './slices/categorySlice'
 
 
+
+
 //creates a redux store, and configures Redux DevTools
 export default configureStore({
     reducer: {

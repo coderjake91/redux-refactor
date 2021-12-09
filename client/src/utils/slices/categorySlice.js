@@ -5,12 +5,14 @@ UPDATE_CATEGORIES,
 UPDATE_CURRENT_CATEGORY
 */
 
+const initialState = {
+  categories: [],
+  currentCategory: ''
+}
+
 export const categorySlice = createSlice({
   name: 'category',
-  initialState: {
-    categories: [],
-    currentCategory: ''
-  },
+  initialState,
   reducers: {
     updateCategories: (state, action)=> {
       state.categories = action.payload;
@@ -20,6 +22,9 @@ export const categorySlice = createSlice({
     }
   }
 });
+
+export const selectCatagories = (state) => state.category.categories;
+export const selectCurrentCategory = (state) => state.category.currentCategory;
 
 // Action creators are generated for each case reducer function
 export const { updateCategories, updateCurrentCategory } = categorySlice.actions

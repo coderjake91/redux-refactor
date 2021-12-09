@@ -7,14 +7,15 @@ import CartItem from "../CartItem";
 import Auth from "../../utils/auth";
 //import { useStoreContext } from "../../utils/GlobalState";
 //import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from "../../utils/actions";
-import { toggleUserCart, addMultipleToCart } from "../../utils/slices/cartSlice";
+import { toggleUserCart, addMultipleToCart, selectCart, selectCartOpen } from "../../utils/slices/cartSlice";
 import { useSelector, useDispatch } from 'react-redux';
 import "./style.css";
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
 const Cart = () => {
-  const { cart, cartOpen } = useSelector(state => state.cart);
+  const cart = useSelector(selectCart);
+  const cartOpen = useSelector(selectCartOpen);
   const dispatch = useDispatch();
   //const [state, dispatch] = useStoreContext();
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);

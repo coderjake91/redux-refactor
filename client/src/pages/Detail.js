@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from '@apollo/react-hooks';
-
+import { QUERY_PRODUCTS } from "../utils/queries";
+import { idbPromise } from "../utils/helpers";
+import spinner from '../assets/spinner.gif'
 import Cart from "../components/Cart";
 //import { useStoreContext } from "../utils/GlobalState";
 // import {
@@ -13,21 +15,19 @@ import Cart from "../components/Cart";
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFromUserCart,
          updateCartQuantity,
-         addToUserCart } from "../utils/slices/cartSlice";
+         addToUserCart, 
+         selectCart} from "../utils/slices/cartSlice";
 
-import { updateProducts } from "../utils/slices/productSlice";
-ƒ
+import { selectProducts, updateProducts } from "../utils/slices/productSlice";
 
-import { QUERY_PRODUCTS } from "../utils/queries";
-import { idbPromise } from "../utils/helpers";
-import spinner from '../assets/spinner.gif'
+
 
 function Detail() {
   //const [state, dispatch] = useStoreContext();
   const { id } = useParams();
 
-  const { cart } = useSelector(state => state.cart);
-  const products = useSelector(state => state.products)
+  const cart  = useSelector(selectCart);
+  const products = useSelector(selectProducts);
   const dispatch = useDispatch();
 
   const [currentProduct, setCurrentProduct] = useState({});
